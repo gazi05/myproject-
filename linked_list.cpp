@@ -7,7 +7,7 @@ struct Node {
     Node *next;
 };
 
-Node *CreateLinkedList(Node * head )
+Node *CreateLinkedList(Node *& head )
 {
 Node *p = head;
 for (int i = 2 ; i <=5 ; i++)
@@ -19,7 +19,7 @@ for (int i = 2 ; i <=5 ; i++)
 p->next = nullptr;
 return head;
 }
-void printLinkedList(Node *head)
+void printLinkedList(Node *&head)
 {
     Node *current = head;
     while (current!= nullptr)
@@ -29,7 +29,7 @@ void printLinkedList(Node *head)
     }
     cout <<endl;
 }
-Node* InsertNode(Node *head)
+Node* InsertNode(Node *&head)
 {
     Node* newNode = new Node();
     newNode->item = -1;
@@ -37,7 +37,7 @@ Node* InsertNode(Node *head)
     head = newNode;
     return newNode;
 }
-Node *Insertlastnode(Node *head)
+Node *Insertlastnode(Node *&head)
 {
     Node *c = head;
     Node *last = new Node();
@@ -50,7 +50,7 @@ Node *Insertlastnode(Node *head)
     c->next = last ;
     return head;
 }
-Node *InsertingMiddle(Node *head ) 
+Node *InsertingMiddle(Node *&head ) 
 {
     Node *NEwNODE = new Node();
     NEwNODE->item = 4;
@@ -87,26 +87,41 @@ Node *removelast(Node *&head)
     prev->next = nullptr;
     return head;
 }
-
+Node *removeMiddleNode(Node *& head , int val)
+{
+    Node *Wanted = head;
+    Node *before = nullptr;
+    while (Wanted->next != nullptr && Wanted->item != val)
+    {
+        before = Wanted;
+        Wanted = Wanted->next;
+    }
+    before->next = Wanted->next;
+    delete Wanted;
+    return head;
+}
 int main (){
     Node *head = new Node();
     head->item = 1 ;
     head->next =nullptr;
-    head = CreateLinkedList(head);
+    CreateLinkedList(head);
     printLinkedList(head);
     cout << "New linked list after inserting a new node " << endl;
-    head = InsertNode(head);
+    InsertNode(head);
     printLinkedList(head);
     cout << "New linked list after inserting a new node at last " << endl;
-    head = Insertlastnode(head);
+    Insertlastnode(head);
     printLinkedList(head);
     cout << "New linked list after inserting a new node at the middle "<< endl;
-    head = InsertingMiddle(head);
+    InsertingMiddle(head);
     printLinkedList(head);
     cout << "after removing the first node " << endl;
     removefirst(head);
     printLinkedList(head);
     cout <<"after removing the last node "<< endl;
     removelast(head);
+    printLinkedList(head);
+    cout << "after removing the middle node "<< endl;
+    removeMiddleNode(head  , 4);
     printLinkedList(head);
 }
