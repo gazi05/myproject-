@@ -73,6 +73,21 @@ Node *removefirst(Node*& head)
     delete current; 
     return head;
 }
+Node *removelast(Node *&head)
+{
+    Node *Last = head;
+    Node *prev = nullptr;
+    while (Last->next != nullptr)
+    {
+        prev = Last;
+        Last = Last->next;
+        
+    }
+    delete Last;
+    prev->next = nullptr;
+    return head;
+}
+
 int main (){
     Node *head = new Node();
     head->item = 1 ;
@@ -90,5 +105,8 @@ int main (){
     printLinkedList(head);
     cout << "after removing the first node " << endl;
     removefirst(head);
+    printLinkedList(head);
+    cout <<"after removing the last node "<< endl;
+    removelast(head);
     printLinkedList(head);
 }
