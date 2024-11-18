@@ -66,6 +66,13 @@ Node *InsertingMiddle(Node *head )
     NEwNODE->next = curr;
     return head;
 }
+Node *removefirst(Node*& head)
+{
+    Node *current = head ;
+    head = current->next ;
+    delete current; 
+    return head;
+}
 int main (){
     Node *head = new Node();
     head->item = 1 ;
@@ -81,5 +88,7 @@ int main (){
     cout << "New linked list after inserting a new node at the middle "<< endl;
     head = InsertingMiddle(head);
     printLinkedList(head);
-
+    cout << "after removing the first node " << endl;
+    removefirst(head);
+    printLinkedList(head);
 }
